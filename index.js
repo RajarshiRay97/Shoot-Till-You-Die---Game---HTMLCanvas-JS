@@ -19,11 +19,11 @@ const yourScoreUI = document.getElementById('yourScoreUI');
 const enemyKilledContainer = document.getElementById('enemyKilledContainer');
 const reset = document.getElementById('reset');
 
-// Sound effects
-let shootSound = new Audio('SoundEffects/gunShot.mp3');
-let explosionSound;
-let gameStartSound = new Audio('SoundEffects/gameStart.mp3');
-let gameOverSound = new Audio('SoundEffects/gameOver.mp3');
+// // Sound effects
+// let shootSound = new Audio('SoundEffects/gunShot.mp3');
+// let explosionSound;
+// let gameStartSound = new Audio('SoundEffects/gameStart.mp3');
+// let gameOverSound = new Audio('SoundEffects/gameOver.mp3');
 
 // to start the background music when the window is loaded
 window.onload = function() {
@@ -251,15 +251,15 @@ function animate(){
             // stop the generation of enemy in background
             clearInterval(intervalId);
 
-            // to stop shootSound
-            shootSound.pause();
-            shootSound.currentTime = 0;
+            // // to stop shootSound
+            // shootSound.pause();
+            // shootSound.currentTime = 0;
 
-            // Gmae Over sound effect
-            let isGOPlaying = gameOverSound.currentTime > 0 && !gameOverSound.paused && !gameOverSound.ended && gameOverSound.readyState > gameOverSound.HAVE_CURRENT_DATA;
-            if (!isGOPlaying) {
-                gameOverSound.play();
-            }
+            // // Gmae Over sound effect
+            // let isGOPlaying = gameOverSound.currentTime > 0 && !gameOverSound.paused && !gameOverSound.ended && gameOverSound.readyState > gameOverSound.HAVE_CURRENT_DATA;
+            // if (!isGOPlaying) {
+            //     gameOverSound.play();
+            // }
 
             if (score > localStorage.getItem('HighScore')) localStorage.setItem('HighScore',String(score));
             yourScore.innerHTML = score;
@@ -271,12 +271,12 @@ function animate(){
             enemyKilledContainer.style.display = 'block';
             scoreCard.style.display = 'flex';
 
-            musicTimeoutId = setTimeout(()=>{
-                let isBGMPlaying = bgm.currentTime > 0 && !bgm.paused && !bgm.ended && bgm.readyState > bgm.HAVE_CURRENT_DATA;
-                if (!isBGMPlaying) {
-                    bgm.play();
-                }
-            },2500);
+            // musicTimeoutId = setTimeout(()=>{
+            //     let isBGMPlaying = bgm.currentTime > 0 && !bgm.paused && !bgm.ended && bgm.readyState > bgm.HAVE_CURRENT_DATA;
+            //     if (!isBGMPlaying) {
+            //         bgm.play();
+            //     }
+            // },2500);
         }
 
         // Detect collision in b/w an enemy with all projectiles
@@ -341,13 +341,13 @@ addEventListener('click',(event)=>{
         // to define velocity of projectile
         const velocity = getVelocity(playerX,playerY,event.clientX,event.clientY,6);
     
-        // Sound effects
-        shootSound.pause();
-        shootSound.currentTime = 0;
-        let isSSPlaying = shootSound.currentTime > 0 && !shootSound.paused && !shootSound.ended && shootSound.readyState > shootSound.HAVE_CURRENT_DATA;
-        if (!isSSPlaying) {
-            shootSound.play();
-        }
+        // // Sound effects
+        // shootSound.pause();
+        // shootSound.currentTime = 0;
+        // let isSSPlaying = shootSound.currentTime > 0 && !shootSound.paused && !shootSound.ended && shootSound.readyState > shootSound.HAVE_CURRENT_DATA;
+        // if (!isSSPlaying) {
+        //     shootSound.play();
+        // }
     
         // Creating projectile on every click and push it on projectiles array
         projectiles.push(new Projectile(
@@ -361,17 +361,17 @@ startGame.addEventListener('click',(event)=>{
     event.stopPropagation();
     // to initialize every variable when we start game
     init();
-    // game start sound effect
-    gameStartSound.play();
+    // // game start sound effect
+    // gameStartSound.play();
     // for animation
     animate();
     // for spawn enemies
     spawnEnemies();
     // remove start game UI
     scoreCard.style.display = 'none';
-    // to stop background music
-    if (musicTimeoutId) clearTimeout(musicTimeoutId);
-    bgm.pause();
+    // // to stop background music
+    // if (musicTimeoutId) clearTimeout(musicTimeoutId);
+    // bgm.pause();
 });
 
 reset.addEventListener('click',()=>{
