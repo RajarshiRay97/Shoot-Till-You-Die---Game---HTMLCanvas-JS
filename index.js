@@ -295,12 +295,12 @@ function animate(){
                 }
 
                 // Sound effect
-                explosionSound = new Audio('SoundEffects/enemyExplosion.mp3');
-                explosionSound.volume = ((enemy.radius<=26?enemy.radius+4:enemy.radius)-4)*(1/(30-4));
-                let isExPlaying = explosionSound.currentTime > 0 && !explosionSound.paused && !explosionSound.ended && explosionSound.readyState > explosionSound.HAVE_CURRENT_DATA;
-                if (!isExPlaying) {
-                    explosionSound.play();
-                }
+                // explosionSound = new Audio('SoundEffects/enemyExplosion.mp3');
+                // explosionSound.volume = ((enemy.radius<=26?enemy.radius+4:enemy.radius)-4)*(1/(30-4));
+                // let isExPlaying = explosionSound.currentTime > 0 && !explosionSound.paused && !explosionSound.ended && explosionSound.readyState > explosionSound.HAVE_CURRENT_DATA;
+                // if (!isExPlaying) {
+                //     explosionSound.play();
+                // }
 
                 if (enemy.radius-10 > 5){
                     // update score for shrinking enemy
