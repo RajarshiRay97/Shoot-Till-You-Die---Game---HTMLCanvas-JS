@@ -323,11 +323,9 @@ function animate(){
                     // updating killCount
                     killCount++;
 
-                    // remove the enemy from enemies array
-                    setTimeout(()=>{
-                        enemies.splice(eIndex,1);
-                        projectiles.splice(prIndex,1);
-                    },0);
+                    // remove the enemy and projectile from enemies and projectiles array
+                    enemies.splice(eIndex,1);
+                    projectiles.splice(prIndex,1);
                 }
             }
         });
