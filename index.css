@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+}
+
+body{
+    background-color: black;
+}
+
+#scoreboard{
+    font-family: 'Fresca', sans-serif;
+    color: white;
+    position: fixed;
+    margin-top: 8px;
+    margin-left: 10px;
+    user-select: none;
+    font-size: 1.6rem;
+}
+
+#container{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreCard{
+    position: relative;
+    font-family: 'Fresca', sans-serif;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+#scoreCard::before{
+    background-color: white;
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+#scoreCard::after{
+    background: url(./Images/logo.png) no-repeat center center;
+    background-size: 300px 280px;
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.07;
+}
+
+#instruction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#heading{
+    margin: 0;
+    margin-right: 5px;
+    font-weight: bold;
+    font-style: italic;
+    color: #008b00;
+}
+
+#playIns{
+    text-align: center;
+    margin: 0;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #009140;
+}
+
+#gameOver{
+    text-align: center;
+    margin: 0;
+    color: #d30000;
+    font-size: 2.3rem;
+    font-family: 'Nosifer', cursive;
+    display: none;
+}
+
+#scoreContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreUI{
+    margin: 0.8rem 1rem;
+}
+
+#yourScoreUI {
+    display: none;
+}
+
+h1,h2 {
+    text-align: center;
+}
+
+#yourScore, #highScore, #killCountEl{
+    font-weight: bold;
+}
+
+#enemyKilledContainer{
+    font-weight: bold;
+    color: #00781a;
+    display: none;
+}
+
+#buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-mg{
+    margin: 1rem 2.3rem;
+}
+
+@media only screen and (max-width: 520px){
+    #scoreCard::after{
+        background-size: 200px 250px;
+    }
+    #instruction{
+        flex-direction: column;
+    }
+    #playIns{
+        max-width: 190.7px;
+    }
+    #scoreContainer{
+        flex-direction: column;
+    }
+    .scoreUI{
+        margin: 0.5rem;
+    }
+    #buttonContainer{
+        flex-direction: column;
+    }
+    .btn-mg{
+        margin: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 320px){
+    #scoreCard{
+        width: 80%;
+    }
+}
