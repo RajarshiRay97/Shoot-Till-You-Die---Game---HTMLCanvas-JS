@@ -6,7 +6,9 @@ canvas.width = innerWidth;
 canvas.height= innerHeight;
 
 // Targeting HTML elements
-const bgm = document.getElementById('bgm');
+const gameName = document.getElementById('gameName');
+const sound = document.getElementById('sound');
+const soundImgElm = document.getElementById('soundImgElm');
 const scoreEl = document.getElementById('scoreEl');
 const instruction = document.getElementById('instruction');
 const startGame = document.getElementById('startGame');
@@ -20,15 +22,12 @@ const enemyKilledContainer = document.getElementById('enemyKilledContainer');
 const reset = document.getElementById('reset');
 
 // Sound effects
+let bgm = new Audio('SoundEffects/backgroundMusic.mp3');
+bgm.loop = true;
 let shootSound = new Audio('SoundEffects/gunShot.mp3');
 let explosionSound;
 let gameStartSound = new Audio('SoundEffects/gameStart.mp3');
 let gameOverSound = new Audio('SoundEffects/gameOver.mp3');
-
-// to start the background music when the window is loaded
-window.onload = function() {
-    bgm.muted = false;
-}
 
 // Player class
 class Player{
@@ -138,6 +137,9 @@ class Particle{
 const playerX = canvas.width/2;
 const playerY = canvas.height/2;
 let player;
+
+// Defining the game sound will play or not
+let isSoundPlaying = false;
 
 // Defining group of projectiles
 let projectiles;
@@ -255,28 +257,26 @@ function animate(){
             shootSound.pause();
             shootSound.currentTime = 0;
 
-            // Gmae Over sound effect
-            let isGOPlaying = gameOverSound.currentTime > 0 && !gameOverSound.paused && !gameOverSound.ended && gameOverSound.readyState > gameOverSound.HAVE_CURRENT_DATA;
-            if (!isGOPlaying) {
-                gameOverSound.play();
-            }
-
             if (score > localStorage.getItem('HighScore')) localStorage.setItem('HighScore',String(score));
             yourScore.innerHTML = score;
             highScore.innerHTML = localStorage.getItem('HighScore');
             killCountEl.innerHTML = killCount;
+            gameName.style.display = 'none';
             instruction.style.display = 'none';
             gameOver.style.display = 'block';
             yourScoreUI.style.display = 'block';
             enemyKilledContainer.style.display = 'block';
             scoreCard.style.display = 'flex';
+            
+            if (isSoundPlaying){
+                // Gmae Over sound effect
+                gameOverSound.play();
 
-            musicTimeoutId = setTimeout(()=>{
-                let isBGMPlaying = bgm.currentTime > 0 && !bgm.paused && !bgm.ended && bgm.readyState > bgm.HAVE_CURRENT_DATA;
-                if (!isBGMPlaying) {
+                // to start again bgm
+                musicTimeoutId = setTimeout(()=>{
                     bgm.play();
-                }
-            },2500);
+                },2500);
+            }
         }
 
         // Detect collision in b/w an enemy with all projectiles
@@ -295,10 +295,9 @@ function animate(){
                 }
 
                 // Sound effect
-                explosionSound = new Audio('SoundEffects/enemyExplosion.mp3');
-                explosionSound.volume = ((enemy.radius<=26?enemy.radius+4:enemy.radius)-4)*(1/(30-4));
-                let isExPlaying = explosionSound.currentTime > 0 && !explosionSound.paused && !explosionSound.ended && explosionSound.readyState > explosionSound.HAVE_CURRENT_DATA;
-                if (!isExPlaying) {
+                if (isSoundPlaying){
+                    explosionSound = new Audio('SoundEffects/enemyExplosion.mp3');
+                    explosionSound.volume = ((enemy.radius<=26?enemy.radius+4:enemy.radius)-4)*(1/(30-4));
                     explosionSound.play();
                 }
 
@@ -342,8 +341,7 @@ addEventListener('click',(event)=>{
         // Sound effects
         shootSound.pause();
         shootSound.currentTime = 0;
-        let isSSPlaying = shootSound.currentTime > 0 && !shootSound.paused && !shootSound.ended && shootSound.readyState > shootSound.HAVE_CURRENT_DATA;
-        if (!isSSPlaying) {
+        if (isSoundPlaying) {
             shootSound.play();
         }
     
@@ -354,13 +352,16 @@ addEventListener('click',(event)=>{
     }
 });
 
+// When we click on 'Start Shoot' button
 startGame.addEventListener('click',(event)=>{
     // to stop ovelaping click event
     event.stopPropagation();
     // to initialize every variable when we start game
     init();
     // game start sound effect
-    gameStartSound.play();
+    if (isSoundPlaying){
+        gameStartSound.play();
+    }
     // for animation
     animate();
     // for spawn enemies
@@ -372,7 +373,24 @@ startGame.addEventListener('click',(event)=>{
     bgm.pause();
 });
 
+// When we click on 'Reset High Score' button
 reset.addEventListener('click',()=>{
     localStorage.removeItem('HighScore');
     highScore.innerHTML = 0;
+});
+
+// When we click on 'Sound On/Off' button
+sound.addEventListener('click',()=>{
+    if (isSoundPlaying){
+        sound.style.backgroundColor = '#5b6370';
+        soundImgElm.src = './Images/SoundOff.png';
+        isSoundPlaying = false;
+        bgm.pause();
+    }
+    else{
+        sound.style.backgroundColor = '#2056af';
+        soundImgElm.src = './Images/SoundOn.png';
+        isSoundPlaying = true;
+        bgm.play();
+    }
 });

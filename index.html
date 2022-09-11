@@ -14,21 +14,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <!-- favicon -->
     <link rel="shortcut icon" href="./Images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./index.css">
-    <title>Shoot Till You Die</title>
+    <title>Shoot Till Die</title>
 </head>
 <body>
-    <audio loop muted autoplay id="bgm" src="./SoundEffects/backgroundMusic.mp3"></audio>
     <div id="scoreboard">
         <span id="scoreTitle">Score: </span><span id="scoreEl">0</span>
     </div>
     <div id="container">
         <div id="scoreCard">
+            <button id="sound">
+                <img src="./Images/SoundOff.png" alt="" id="soundImgElm" class="soundImg">
+            </button>
+            <div id="gameName">
+                <h1 id="shadow">
+                    <span style="color: #e90000">S</span>
+                    <span style="color: #0bc75f">h</span>
+                    <span style="color: #df2aa7">o</span>
+                    <span style="color: #0095ed">o</span>
+                    <span style="color: #8900ab">t</span>
+                    <span>&nbsp;</span>
+                    <span style="color: #ff7600">T</span>
+                    <span style="color: #1b7f9d">i</span>
+                    <span style="color: #87db00">l</span>
+                    <span style="color: #fff14f">l</span>
+                    <span>&nbsp;</span>
+                    <span style="color: #f3007b">D</span>
+                    <span style="color: #00d59a">i</span>
+                    <span style="color: #00c3e3">e</span>
+                </h1>
+            </div>
             <div id="instruction" class="subContainer">
                 <h5 id="heading">Instruction: </h5>
                 <p id="playIns">Click or touch on screen to shoot on that direction</p>
